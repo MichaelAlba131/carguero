@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "7507bf86-1220-484f-ba86-c9fbb2011015",
+		"name": "POST METHODS",
+		"description": "# About this collection\n\nThis collection helps you set up contract tests to ensure that two separate systems are compatible and can communicate with one another.\n\n## **Using the collection**\n\n**Step 1:** Send the sample requests and view the response and test results.\n\n**Step 2:** Replace the sample request URLs with your desired API endpoints.\n\n**Step 3:** Customize the tests in the \"Tests\" tab if needed. Don't forget to save your changes.\n\n### Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)\n\n[  \n](https://postman.postman.co/documentation/24552533-5bead607-0197-4e1d-87d4-3160bc7631c1?entity=&branch=&version=)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10362762",
+		"_collection_link": "https://grey-astronaut-7591.postman.co/workspace/Carguero~841fa7ae-d76e-4a96-a52e-3fa0223ea92d/collection/10362762-7507bf86-1220-484f-ba86-c9fbb2011015?action=share&source=collection_link&creator=10362762"
+	},
+	"item": [
+		{
+			"name": "GET ALL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar o status code da requisicao\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validar o content type\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+							"});",
+							"",
+							"pm.test(\"Validar se Response e um array de objetos\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.be.an('array');",
+							"    pm.expect(response).to.have.length.above(0);",
+							"    pm.expect(response[0]).to.be.an('object');",
+							"});",
+							"",
+							"pm.test(\"Validar se cada item possui um id\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    jsonData.forEach(post => {",
+							"        pm.expect(post.id).to.exist;",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Validar as propriedades dos objetos do response\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.be.an('array');",
+							"    pm.expect(response).to.have.length.above(0);",
+							"    pm.expect(response[0]).to.have.property('userId');",
+							"    pm.expect(response[0]).to.have.property('id');",
+							"    pm.expect(response[0]).to.have.property('title');",
+							"    pm.expect(response[0]).to.have.property('body');",
+							"});",
+							"",
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {",
+							"        font-size:14px;",
+							"        color:#333333;",
+							"        width:100%;",
+							"        border-width: 1px;",
+							"        border-color: #87ceeb;",
+							"        border-collapse: collapse;",
+							"    }",
+							"    .tftable th {",
+							"        font-size:18px;",
+							"        background-color:#87ceeb;",
+							"        border-width: 1px;",
+							"        padding: 8px;",
+							"        border-style: solid;",
+							"        border-color: #87ceeb;",
+							"        text-align:left;",
+							"    }",
+							"    .tftable tr {",
+							"        background-color:#ffffff;",
+							"    }",
+							"    .tftable td {",
+							"        font-size:14px;",
+							"        border-width: 1px;",
+							"        padding: 8px;",
+							"        border-style: solid;",
+							"        border-color: #87ceeb;",
+							"    }",
+							"    .tftable tr:hover {",
+							"        background-color:#e0ffff;",
+							"    }",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>User ID</th>",
+							"        <th>ID</th>",
+							"        <th>Title</th>",
+							"        <th>Body</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response}}",
+							"        <tr id=row_{{@key}}>",
+							"            <td>{{userId}}</td>",
+							"            <td>{{id}}</td>",
+							"            <td>{{title}}</td>",
+							"            <td>{{body}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()};",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				},
+				"description": "The tests in this request validate that:\n\n- the response code is 200\n- the response is a JSON object\n- the response has an 'arg' object\n- the response has 'headers' object\n- the response has a 'URL' property"
+			},
+			"response": []
+		},
+		{
+			"name": "GET WITH QUERY PARAMS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validate that the response code should be 200\r",
+							"pm.test(\"Response Code should be 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Run validations on response headers like Content-Type\r",
+							"pm.test(\"Content-Type should be JSON\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar as propriedades do objeto do response\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"    pm.expect(response).to.have.length.above(0);\r",
+							"    pm.expect(response[0]).to.have.property('userId', 1);\r",
+							"    pm.expect(response[0]).to.have.property('id', 1);\r",
+							"    pm.expect(response[0]).to.have.property('title', 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit');\r",
+							"    pm.expect(response[0]).to.have.property('body', 'quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto');\r",
+							"});\r",
+							"\r",
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>User ID</th>\r",
+							"        <th>ID</th>\r",
+							"        <th>Title</th>\r",
+							"        <th>Body</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response}}\r",
+							"        <tr>\r",
+							"            <td>{{userId}}</td>\r",
+							"            <td>{{id}}</td>\r",
+							"            <td>{{title}}</td>\r",
+							"            <td>{{body}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts?id=1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "The tests in the request validate the response code and the data returned in the response is the same as the one being sent."
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Requisicao Post com sucesso\", () => {",
+							"  pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Validar o nome do status de Criado\", () => {",
+							"  pm.response.to.have.status(\"Created\");",
+							"});",
+							"",
+							"pm.test(\"Validar o content type\", () => {",
+							"  pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");",
+							"});",
+							"",
+							"pm.test(\"validar as propriedades do objeto no response\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.be.an('object');",
+							"    pm.expect(response).to.have.property('userId');",
+							"    pm.expect(response).to.have.property('title');",
+							"    pm.expect(response).to.have.property('body');",
+							"    pm.expect(response).to.have.property('id', 101);",
+							"    console.log(response);",
+							"});",
+							"",
+							"pm.test(\"Criacao do user 101\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson.id).to.eql(101);",
+							"  pm.expect(responseJson.title).to.eql(\"Solicitação post\");",
+							"  pm.expect(responseJson.body).to.eql(\"Testes de API com Postman\");",
+							"  pm.expect(responseJson.userId).to.eql(5);",
+							"});var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>User ID</th>",
+							"        <th>Title</th>",
+							"        <th>Body</th>",
+							"        <th>ID</th>",
+							"    </tr>",
+							"    <tr>",
+							"        <td>{{response.userId}}</td>",
+							"        <td>{{response.title}}</td>",
+							"        <td>{{response.body}}</td>",
+							"        <td>{{response.id}}</td>",
+							"    </tr>",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\": 5, \"title\": \"Solicitação post\", \"body\": \"Testes de API com Postman\"}"
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}
