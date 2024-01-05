@@ -21,7 +21,7 @@ Navegue até o diretório postman no repositório.
 Você encontrará um arquivo com a extensão .json, com o nome de POST_METHODS.postman_collection.json.
 
 Abra o Postman:
-Certifique-se de ter o Postman instalado em sua máquina. Se não tiver, faça o download aqui.
+Certifique-se de ter o Postman instalado em sua máquina. Se não tiver, faça o download.
 
 Importe a Collection:
 No Postman, clique no botão "Import" no canto superior esquerdo.
