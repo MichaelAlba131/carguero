@@ -1,21 +1,21 @@
 # PROJETO CARGUERO - DESAFIO
-Teste JavaScript API Postman
+### Teste JavaScript API Postman
 
 
 Projeto Teste de API - Guia de Importação da Collection no Postman
 Descrição do Projeto: 
 Este repositório contém o código fonte e a documentação do Projeto Teste de API, uma collection do postman que realiza testes no https://jsonplaceholder.typicode.com/posts. Este guia visa auxiliar a importar facilmente a Collection no Postman para interagir com a API do Projeto.
 
-Importando a Collection no Postman
+### Importando a Collection no Postman
 O Postman é uma plataforma amplamente utilizada para testar APIs. Siga os passos abaixo para importar a Collection no Postman:
 
-Clone o Repositório:
+### Clone o Repositório:
 ```ruby
 git clone https://github.com/MichaelAlba131/carguero.git
 cd carguero
 ```
 
-Encontre o Arquivo de Collection: 
+### Encontre o Arquivo de Collection: 
 
 Navegue até o diretório postman no repositório.
 Você encontrará um arquivo com a extensão .json, com o nome de POST_METHODS.postman_collection.json.
@@ -23,11 +23,14 @@ Você encontrará um arquivo com a extensão .json, com o nome de POST_METHODS.p
 Abra o Postman:
 Certifique-se de ter o Postman instalado em sua máquina. Se não tiver, faça o download.
 
-Importe a Collection:
+### Importe a Collection:
 No Postman, clique no botão "Import" no canto superior esquerdo.
+
 Selecione a opção "Upload Files" e navegue até o arquivo POST_METHODS.postman_collection.json.
+
 Clique em "Open" para importar a Collection.
-Visualize e Execute as Requisições:
+
+### Visualize e Execute as Requisições:
 
 Agora, você verá a Collection listada no painel esquerdo do Postman.
 Abra a Collection para visualizar todas as requisições disponíveis.
