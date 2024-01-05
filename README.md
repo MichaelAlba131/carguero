@@ -4,7 +4,7 @@ Teste JavaScript API Postman
 
 Projeto Teste de API - Guia de Importação da Collection no Postman
 Descrição do Projeto: 
-Este repositório contém o código fonte e a documentação do Projeto Teste de API, uma collection do postman que realiza testes no https://jsonplaceholder.typicode.com/posts. Este guia visa auxiliarimportar facilmente a Collection no Postman para interagir com a API do Projeto.
+Este repositório contém o código fonte e a documentação do Projeto Teste de API, uma collection do postman que realiza testes no https://jsonplaceholder.typicode.com/posts. Este guia visa auxiliar a importar facilmente a Collection no Postman para interagir com a API do Projeto.
 
 Importando a Collection no Postman
 O Postman é uma plataforma amplamente utilizada para testar APIs. Siga os passos abaixo para importar a Collection no Postman:
